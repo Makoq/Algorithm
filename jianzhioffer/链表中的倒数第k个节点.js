@@ -4,12 +4,12 @@
     this.next = null;
 }*/
 function FindKthToTail(head,k){
-    var arr=[];
-    var cur=head.next;
-    while(cur!=null){
-        arr.push(cur)
-        cur=cur.next;
+   var arr=[];
+     
+    while(head!=null){
+        arr.push(head)
+        head=head.next;
     }
     
-    return arr[arr.length-1]
+    return arr[arr.length-k]
 }
