@@ -1,63 +1,32 @@
 /**
- * @param {number[]} nums
- * @return {void} Do not return anything, modify nums in-place instead.
+ * @param {number} n
+ * @return {string[]}
  */
-var nextPermutation = function(nums) {
+var generateParenthesis = function(n) {
     
-    let str=nums,a=-1,b,tep
-   
+    let res=[],ori=['(',')']
     
-    for(let i=str.length-1;i>0;i--){
-        if(str[i]>str[i-1]){
-            a=i-1;
-            break;
-        }
-    }
-    
-    if(a<0){
-        
-        str.reverse()
-        return str;
-        
+    if(n<=0){
+       return []
        }
-    
-    for(let i=str.length-1;i>0;i--){
-        if(str[i]>str[a]){
-            b=i;
-            break;
+    else if(n===1){
+            return ori
         }
-    }
+    else return fc(n,res,ori)
     
-    tep=str[a]
-    str[a]=str[b]
-    str[b]=tep
-    
-    
-    let afterb=str.slice(a+1,str.length)
-    
-    so(afterb)
-     
-    
-    let beforeb=str.slice(0,a+1)
-    console.log(beforeb.concat(afterb))
-    // return beforeb.concat(afterb)
 };
 
-function so(str){
-    let tep
-    for(let i=0;i<str.length-1;i++){
-        for(let j=i+1;j<str.length;j++){
-            if(str[i]>str[j]){
-                   tep=str[i]
-                   str[i]=str[j]
-                   str[j]=tep
-                   
-               }
-        }
+function fc(n,res,ori){
+    
+    if(n===1){
+        console.log(res)
+        // return res
+    }else{
+        
+        
     }
 }
 
 
+generateParenthesis(2)
 
-var a=[1,3,2]
-nextPermutation(a)

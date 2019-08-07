@@ -10,7 +10,10 @@
 //  "()()()"
 //]
 
+
+//解法1：暴力解法，列出所有的排列情况，从中筛选出合理的情况，
 //这种解法超出了时间限制，最多到n=4，并没有在leetcode上提交通过，仍需要改进，先记着
+
 
 /**
  * @param {number} n
@@ -81,6 +84,63 @@ function test(str){
     
 }
 
-//括号生成
+//解法2：回溯法（向前探索，走不通再返回），参考leetcode标准解法，已通过leetcode的提交
+//     这种解法也很简单，很好理解
+/**
+ * @param {number} n
+ * @return {string[]}
+ */
+var generateParenthesis = function(n) {
+    
+    let res=[] 
+    
+    if(n<=0){
+       return []
+    }
+    else{
+        fc(res,'',0,0,n)
+    }
+    return res
+    
+};
+
+function fc( res,cul,open,close,max){
+    
+    if(cul.length===max*2){
+        if(check(cul)&&res.indexOf(cul)<0){
+             res.push(cul)
+        }
+       
+        return
+    }else{
+        if(open<max){
+            fc(res,cul+'(',open+1,close,max)
+        }
+        if(close<max){
+           fc(res,cul+')',open,close+1,max)
+        }
+        
+        
+    }
+}
+
+function check(arr){
+    let a=arr.split("")
+    let st=[]
+    for(let i=0;i<a.length;i++){
+        if(a[i]==='('){
+            st.push(a[i])
+        }else if(a[i]===')'){
+           
+            st.pop()
+        }
+    }
+    
+    if(st.length!=0){
+       return false
+       }
+    else return true
+}
+
 
 
