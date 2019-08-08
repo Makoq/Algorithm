@@ -1,4 +1,5 @@
 /**
+<<<<<<< HEAD
  * @param {number[]} nums
  * @param {number} target
  * @return {number}
@@ -43,11 +44,43 @@ var search = function(nums, target) {
             // return i
             console.log(i)
         }
+=======
+ * @param {number} n
+ * @return {string[]}
+ */
+var generateParenthesis = function(n) {
+    
+    let res=[],ori=['(',')']
+    
+    if(n<=0){
+       return []
+       }
+    else if(n===1){
+            return ori
+        }
+    else return fc(n,res,ori)
+    
+};
+
+function fc(n,res,ori){
+    
+    if(n===1){
+        console.log(res)
+        // return res
+    }else{
+        
+        
+>>>>>>> 00d92df4318ba3cf37b270b55d5c0bfb943fa321
     }
 
 
+<<<<<<< HEAD
     return -1
 };
 
 var a=[4,5,6,7,0,1,2]
 search(a,3)
+=======
+generateParenthesis(2)
+
+>>>>>>> 00d92df4318ba3cf37b270b55d5c0bfb943fa321

@@ -10,66 +10,51 @@
 // 3,2,1->1,2,3
 // 1,1,5->1,5,1
 
+//字典序思路：
+// 1.从右至左，找到第一个左小雨右邻，将该左位置记为a
+// 2.再从右至左，找到第一个大于该位的元素，将该位置记为b
+// 2.交换位置a，b的元素
+// 3.将a位置后的元素从小到大排序，over
+
 /**
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var nextPermutation = function(nums) {
     
-    let str=nums,a=-1,b,tep
-   
-    
-    for(let i=str.length-1;i>0;i--){
-        if(str[i]>str[i-1]){
-            a=i-1;
+    let a=-1,b,c
+    for(let i=nums.length-1;i>0;i--){
+        if(nums[i-1]<nums[i]){
+            a=i-1 
             break;
         }
     }
     
-    if(a<0){
-        
-        str.reverse()
-        return str;
-        
-       }
+    if(a===-1){
+       return  nums.reverse();
+    }
     
-    for(let i=str.length-1;i>0;i--){
-        if(str[i]>str[a]){
-            b=i;
-            break;
+    for(let i=nums.length-1;i>=0;i--){
+        if(nums[i]>nums[a]){
+           b=i
+            break
+        }
+    }
+    c=nums[a];
+    nums[a]=nums[b]
+    nums[b]=c
+    
+    for(let i=a+1;i<nums.length-1;i++){
+        for(let j=i+1;j<nums.length;j++){
+            if(nums[i]>nums[j]){
+                c=nums[i]
+                nums[i]=nums[j]
+                nums[j]=c
+            }
         }
     }
     
-    tep=str[a]
-    str[a]=str[b]
-    str[b]=tep
+    return nums
     
     
-    let afterb=str.slice(a+1,str.length)
-    
-    so(afterb)
-     
-    
-    let beforeb=str.slice(0,a+1)
-    console.log(beforeb.concat(afterb))
-    // return beforeb.concat(afterb)
 };
-
-function so(str){
-    let tep
-    for(let i=0;i<str.length-1;i++){
-        for(let j=i+1;j<str.length;j++){
-            if(str[i]>str[j]){
-                   tep=str[i]
-                   str[i]=str[j]
-                   str[j]=tep
-                   
-               }
-        }
-    }
-}
-
-
-
-var a=[1,3,2]
-nextPermutation(a)
