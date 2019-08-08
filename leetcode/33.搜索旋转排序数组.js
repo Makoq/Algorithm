@@ -1,3 +1,5 @@
+//利用了二分查找
+
 /**
  * @param {number[]} nums
  * @param {number} target
@@ -5,7 +7,10 @@
  */
 var search = function(nums, target) {
     
-    let minIndx,minValue=nums[0]
+    if(nums.length===0||nums.indexOf(target)<0){
+        return -1
+    }
+     let minIndx,minValue=nums[0]
     
     for(let j=0;j<nums.length;j++){
         if(nums[j]<minValue){
@@ -40,14 +45,11 @@ var search = function(nums, target) {
     }
     for(let i=0;i<nums.length;i++){
         if(nums[i]===newNums[m]){
-            // return i
-            console.log(i)
+            return i
+            // console.log(i)
         }
     }
 
 
     return -1
 };
-
-var a=[4,5,6,7,0,1,2]
-search(a,3)
