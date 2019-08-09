@@ -1,3 +1,5 @@
+//回溯法
+
 /**
  * @param {number[]} nums
  * @return {number[][]}
@@ -20,12 +22,13 @@ function fc(nums,cu,res){
     if(nums.length===0){
         let [...c]=cu
         res.push(c)
-
         cu.pop()
     }else{
-        let [...a]=nums
 
         for(let i=0;i<nums.length;i++){
+            
+            let [...a]=nums
+            
             cu.push(a[i])
             
             a.splice(i,1)
@@ -34,13 +37,11 @@ function fc(nums,cu,res){
 
             a=nums
         }
-
-
         cu.pop()
     }
     
     
 }
-
 var a=[1,2,3]
 permute(a)
+  
