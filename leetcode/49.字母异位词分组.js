@@ -20,29 +20,22 @@ var groupAnagrams = function(strs) {
                 has.push(arr[k][0].split("").sort().join(""))
             }
 
-            
+            //当结果数组中不含当前遍历元素时直接push进去
             if(has.indexOf(strs[i].split("").sort().join(""))<0){
                 arr.push([strs[i]])
             }else{
+            //当结果数组中含有当前遍历元素时，push到同类数组中
                 for(let j=0;j<arr.length;j++){
                     if(arr[j][0].split("").sort().join("")===strs[i].split("").sort().join("")){
     
                         arr[j].push(strs[i])
                     }
                 }
-            }
-    
-
-            
-        
+            }          
         }
     }
     
-    // return arr
-    console.log(arr)
+    return arr
+    // console.log(arr)
     
 };
-
-var a=["eat","tea","tan","ate","nat","bat"]
-
-groupAnagrams(a)
