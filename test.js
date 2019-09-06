@@ -1,48 +1,91 @@
-/**
- * @param {string[]} strs
- * @return {string[][]}
+ 
+ /**
+  * 168 / 169 还是时间效率的问题
+ * @param {number[][]} intervals
+ * @return {number[][]}
  */
-var groupAnagrams = function(strs) {
-    
-    let arr=[]
-    
-    for(let i=0;i<strs.length;i++){
-        
-        if(arr.length===0){
-            let arr2=[]
-            arr2.push(strs[i])
-            arr.push(arr2)
-        }else{
-            
-            //if arr no strs[i],arr push strs[i]
-            let has=[]
-            for(let k=0;k<arr.length;k++){
-                has.push(arr[k][0].split("").sort().join(""))
-            }
-
-            
-            if(has.indexOf(strs[i].split("").sort().join(""))<0){
-                arr.push([strs[i]])
-            }else{
-                for(let j=0;j<arr.length;j++){
-                    if(arr[j][0].split("").sort().join("")===strs[i].split("").sort().join("")){
-    
-                        arr[j].push(strs[i])
-                    }
-                }
-            }
-    
-
-            
-        
-        }
+var merge = function(intervals) {
+ 
+    for(inter of intervals){
+        inter.sort((a,b)=>{
+            return a-b
+        })
     }
+   intervals.sort((a,b)=>{
+        return a[0]-b[0]
+    })
     
-    // return arr
-    console.log(arr)
+     let del=[]
+    for(let i=0;i<intervals.length;i++){
+       
+        for(let j=i+1;j<intervals.length;j++){
+            
+            let a=Math.max.apply(this,intervals[i]),b=Math.min.apply(this,intervals[j])
+            if(a>=b){
+                
+                let loc2=-1,loc1=-1
+                intervals[j].forEach((v,i)=>{
+                    if(v>=a){
+                       loc1=i 
+                    }
+                })
+                
+                 intervals[i].forEach((v,i)=>{
+                    if(v<=b){
+                       loc2=i 
+                    }
+                })
+
+                if(loc2===-1){
+                    intervals[i]=intervals[j]
+                    // intervals.splice(i,1)
+                    del.push(i)
+                    
+                }if(loc1===-1){
+                    // intervals.splice(j,1)
+                     del.push(j)
+                    
+                     
+                }else{
+                    if(a!=b){intervals[i]=intervals[i].slice(0,loc2+1)}
+                    else{intervals[i]=intervals[i].slice(0,loc2)}
+                                     
+                    intervals[i]=intervals[i].concat(intervals[j].slice(loc1))
+                    // intervals.splice(j,1) 
+                     del.push(j)
+                }               
+            }
+        }
+        
+
+
+    }    
+    
+    del=Array.from(new Set(del))
+
+    while(del.length){
+        intervals.splice(del.pop(),1)
+    }
+
+     
+
+ 
+    
+    console.log(String(intervals))
+    return intervals
     
 };
 
-var a=["eat","tea","tan","ate","nat","bat"]
+//几种类型的测试用例，代表几种不同的数据情况
+a=
+// [[1,4],[0,4]]
+[[1,4],[0,2],[3,5]]
+// [[1,4],[2,3]]
+// [[1,3],[8,10],[2,6],[15,18]]
+merge(a)
 
-groupAnagrams(a)
+
+
+
+
+
