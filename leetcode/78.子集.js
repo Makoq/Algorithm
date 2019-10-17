@@ -13,11 +13,13 @@ var subsets = function(nums) {
        }else{
            let re=[],t=[]
            f(nums,i,t,0,re)
-           res.push(re)
+           re.forEach((v)=>{
+               res.push(v)
+           })      
        }
     }
     
-    return res
+   return res
 };
 
 function f(arr,n,tp,j,re){
@@ -28,7 +30,7 @@ function f(arr,n,tp,j,re){
     }else{       
         for(let i=j;i<arr.length;i++){
              tp.push(arr[i])            
-            f(arr,n-1,tp,j+1,re)                 
+            f(arr,n-1,tp,i+1,re)                 
         }      
         tp.pop()
     }
